@@ -1,0 +1,33 @@
+{
+  "name": "final-project-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apra-saputra/Final-Project-BE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/apra-saputra/Final-Project-BE/issues"
+  },
+  "homepage": "https://github.com/apra-saputra/Final-Project-BE#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "ioredis": "^5.2.4",
+    "jest": "^29.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.8.0",
+    "pg": "^8.8.0",
+    "sequelize": "^6.26.0",
+    "socket.io": "^4.5.4",
+    "supertest": "^6.3.1"
+  }
+}
