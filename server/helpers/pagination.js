@@ -14,3 +14,22 @@ const getPagingData = (data, page, limit) => {
 };
 
 module.exports = {getPagination, getPagingData} 
+
+/*
+how to use
+
+let pagination = getPagination(page) 
+//page -> page number start with 0, 
+//second param size, total show data per page
+
+// add pagination result as option
+options.limit = pagination.limit
+options.offset = pagination.offset
+
+
+const data = await Model.findAndCountAll(options)
+
+// response for frontend
+const responses = getPagingData(data, page, pagination.limit)
+
+*/
