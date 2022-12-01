@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       Project.hasMany(models.Comment, { foreignKey: "ProjectId" });
       Project.hasMany(models.Step, { foreignKey: "ProjectId" });
       Project.belongsTo(models.User, { foreignKey: "UserId" });
+			Project.belongsTo(models.Tag)
     }
   }
   Project.init(
@@ -26,13 +27,22 @@ module.exports = (sequelize, DataTypes) => {
       imgUrl: DataTypes.STRING,
       introduction: {
 				allowNull: false,
-				type: DataTypes.STRING,
+				type: DataTypes.TEXT,
 			},
+			difficulty: {
+				type: DataTypes.STRING
+			},
+			TagId: DataTypes.INTEGER,
     },
     {
       sequelize,
       modelName: "Project",
     }
   );
+
+		Project.beforeCreate((projects, option) => {
+			projects.slug = projects.title.replace(' ', '-')
+		})
+
   return Project;
 };

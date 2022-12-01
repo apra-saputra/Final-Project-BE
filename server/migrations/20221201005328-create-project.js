@@ -25,14 +25,28 @@ module.exports = {
       },
       slug: {
 				allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       imgUrl: {
         type: Sequelize.STRING
       },
       introduction: {
 				allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
+      },
+			difficulty: {
+				allowNull: false,
+				type: Sequelize.STRING,
+			},
+			TagId: {
+				allowNull: false,
+				type: Sequelize.INTEGER,
+				references: {
+					model: "Tags",
+					key: "id"
+				},
+				onDelete: 'CASCADE',
+				onUpdate: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
