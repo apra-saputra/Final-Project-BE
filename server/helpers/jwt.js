@@ -9,7 +9,7 @@ const decodeToken = (token) => {
 	return jwt.verify(token, SECRET)
 }
 
- 
+
 module.exports = {
 	encodeToken,
 	decodeToken
