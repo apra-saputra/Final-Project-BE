@@ -2,32 +2,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Steps', {
+    await queryInterface.createTable('Tags', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ProjectId: {
-				allowNull: false,
-        type: Sequelize.INTEGER,
-				references: {
-					model: "Projects",
-					key: "id"
-				},
-				onDelete: 'CASCADE',
-				onUpdate: 'CASCADE'
-      },
       name: {
-				allowNull: false,
-        type: Sequelize.STRING
-      },
-      description: {
-				allowNull: false,
-        type: Sequelize.ARRAY(Sequelize.STRING)
-      },
-      imgUrl: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -41,6 +23,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Steps');
+    await queryInterface.dropTable('Tags');
   }
 };
