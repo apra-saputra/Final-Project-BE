@@ -1,54 +1,38 @@
-const { Movie } = require("../models")
+const { Favorite, Report } = require("../models");
 
 class Authorization {
-    static async deleteAuthorization(req, res, next) {
-        try {
-            const { id } = req.params;
-            const movie = await Movie.findByPk(id);
+  static async deleteFavorite(req, res, next) {
+    try {
+      const { favid } = req.params;
+      const favorite = await Favorite.findByPk(favid);
 
-            if (!movie) {
-                throw new Error("Movie Not Found");
-            }
-            if (movie.authorId != req.user.id && req.user.role != 'Admin') {
-                throw new Error("Forbidden");
-            }
-            next();
-        } catch (err) {
-            next(err);
-        }
+      if (!favorite) {
+        throw { name: "project_not_found" };
+      }
+      if (favorite.UserId != req.user.id || req.user.role != "Admin") {
+        throw { name: "forbidden" };
+      }
+      next();
+    } catch (err) {
+      next(err);
     }
+  }
 
-    static async statusAuthorization(req, res, next) {
-        try {
-            const { id } = req.params;
-            const movie = await Movie.findByPk(id);
+  static async deleteReport(req, res, next) {
+    try {
+      const { reportid } = req.params;
+      const report = await Report.findByPk(reportId);
 
-            if (!movie) {
-                throw new Error("Movie Not Found");
-            }
-            if (req.user.role != "Admin") {
-                throw new Error("Forbidden");
-            }
-            next();
-        } catch (err) {
-            next(err)
-        }
+      if (!report) {
+        throw { name: "project_not_found" };
+      }
+      if (report.UserId != req.user.id || req.user.role != "Admin") {
+        throw { name: "forbidden" };
+      }
+      next();
+    } catch (err) {
+      next(err);
     }
-
-    static async bookmarkAuthorization(req, res, next) {
-        try {
-            const { id } = req.params;
-            const movie = await Movie.findByPk(id);
-            if (!movie) {
-                throw new Error("Movie Not Found");
-            }
-            if (req.user.role != "Customer") {
-                throw new Error("Forbidden");
-            }
-            next();
-        } catch (err) {
-            next(err)
-        }
-    }
+  }
 }
 module.exports = Authorization;

@@ -1,10 +1,14 @@
-const authentication = require('../middleware/authentication');
-const express = require('express');
-const FavoriteControl = require('../controllers/favorite');
+const express = require("express");
+const FavoriteControl = require("../controllers/favorite");
+const Authorization = require("../middleware/authorization");
 const favorite = express.Router();
 
-favorite.get('/:projectid', FavoriteControl.readFavByProject)
-favorite.post('/:projectid', FavoriteControl.createFav)
-favorite.delete('/:favId', FavoriteControl.deleteFav)
+favorite.get("/:projectid", FavoriteControl.readFavByProject);
+favorite.post("/:projectid", FavoriteControl.createFav);
+favorite.delete(
+  "/:favid",
+  Authorization.deleteFavorite,
+  FavoriteControl.deleteFav
+);
 
-module.exports = favorite
+module.exports = favorite;
