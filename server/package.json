@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node .bin/www",
-    "dev": "npx nodemon .bin/www",
+    "start": "node bin/www",
+    "dev": "npx nodemon bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

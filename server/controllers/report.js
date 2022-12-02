@@ -47,11 +47,11 @@ module.exports = class ReportControl {
 
   static async deleteReport(req, res, next) {
     try {
-      const { reportId } = req.params;
-      await Report.destroy();
+      const { reportid } = req.params;
+      await Report.destroy({where: {id: reportid}});
 
     res.json({
-        message: `Report with id : ${favId}`
+        message: `Report with id : ${reportid} has been deleted`
     })  
     } catch (err) {
       next(err);
