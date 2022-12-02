@@ -24,6 +24,9 @@ const errorHandler = (err, req, res, next) =>{
   } else if(err.name === "duplicate_favorite"){
     code = 400
     message = "project already on your favorite"
+  } else if(err.name === "duplicate_report"){
+    code = 400
+    message = "project already on your report"
   }
   res.status(code).json({message})
 }
