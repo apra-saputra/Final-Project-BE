@@ -48,7 +48,7 @@ module.exports = class FavoriteControl {
   static async deleteFav(req, res, next) {
     try {
       const { favId } = req.params;
-      await Favorite.destroy();
+      await Favorite.destroy({where: {id: favId}});
 
     res.json({
         message: `Favorite with id : ${favId}`
