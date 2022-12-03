@@ -1,6 +1,6 @@
 
 const express = require('express');
-const ReportControl = require('../controllers/report');
+const ReportControl = require('../controllers/Report');
 const Authorization = require('../middleware/authorization');
 const report = express.Router();
 

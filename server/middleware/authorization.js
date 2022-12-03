@@ -1,4 +1,4 @@
-const { Favorite, Report } = require("../models");
+const { Favorite, Report, Comment } = require("../models");
 
 class Authorization {
   static async deleteFavorite(req, res, next) {
@@ -27,6 +27,23 @@ class Authorization {
         throw { name: "project_not_found" };
       }
       if (report.UserId != req.user.id || req.user.role != "Admin") {
+        throw { name: "forbidden" };
+      }
+      next();
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async deleteComment(req, res, next) {
+    try {
+      const { id } = req.params;
+      const comment = await Comment.findByPk(id);
+
+      if (!comment) {
+        throw { name: "project_not_found" };
+      }
+      if (comment.UserId != req.user.id || req.user.role != "Admin") {
         throw { name: "forbidden" };
       }
       next();

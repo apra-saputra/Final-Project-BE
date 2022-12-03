@@ -1,5 +1,5 @@
 const express = require("express");
-const FavoriteControl = require("../controllers/favorite");
+const FavoriteControl = require("../controllers/Favorite");
 const Authorization = require("../middleware/authorization");
 const favorite = express.Router();
 
