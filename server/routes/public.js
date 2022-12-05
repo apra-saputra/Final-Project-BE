@@ -6,6 +6,7 @@ const Projects = require('../controllers/Projects');
 const authentication = require('../middleware/authentication');
 const Authorization = require('../middleware/authorization');
 const favorite = require('./favorite')
+const project = require('./project');
 const report = require('./report')
 
 router.post('/login', Users.Login);
