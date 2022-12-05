@@ -47,7 +47,7 @@ class Projects {
       })
       await Step.bulkCreate(output, { transaction: t })
       t.commit();
-      res.status(200).json({ message: "Project has been created" });
+      res.status(201).json({ message: "Project has been created" });
     } catch (err) {
       imagesId.forEach(async (id) => {
         await imagekit.deleteFile(id);
@@ -88,6 +88,15 @@ class Projects {
         }]
       })
       res.status(200).json(projects);
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  static async SoftDelete(req, res, next) {
+    try {
+      await Project.update({status: req.body.status},{where:{id: req.params.projectid}})
+      res.status(200).json({message: `status has been updated to`});
     } catch (err) {
       next(err)
     }
