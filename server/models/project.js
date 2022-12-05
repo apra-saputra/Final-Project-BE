@@ -40,9 +40,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-		Project.beforeCreate((projects, option) => {
-			projects.slug = projects.title.replace(' ', '-')
-		})
+		// Project.beforeCreate((projects, option) => {
+		// 	projects.slug = projects.title.replace(' ', '-')
+		// })
 
   return Project;
 };

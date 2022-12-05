@@ -1,5 +1,6 @@
 const request = require('supertest')
 const app = require('../app')
+const { comparePassword } = require('../helpers/bcrypt')
 const { sequelize, User } = require('../models')
 const { queryInterface } = sequelize
 
@@ -39,6 +40,7 @@ describe('POST /public/login - User Login with email and password', () => {
         password: '123456',
       })
       .then(res=>{
+        console.log(res)
         expect(res.status).toBe(200);
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('access_token', expect.any(String));
