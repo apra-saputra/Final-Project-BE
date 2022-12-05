@@ -1,48 +1,42 @@
-const { Comment } = require('../models')
+const { getPagination, getPagingData } = require("../helpers/pagination");
+const { Comment } = require("../models");
 
+class CommentController {
+  static async createComment(UserId, ProjectId, comment) {
+    if (!ProjectId) {
+      throw { name: "project_not_found" };
+    }
 
-class Comment {
-	static async createComment(req,res,next){
-		try {
-			const UserId = req.user.id
-			const ProjectId = req.params.id
-			const comment = req.body
+    await Comment.create({
+      ProjectId,
+      UserId,
+      comment,
+    });
 
-			if (!ProjectId){
-				throw { name: "project_not_found" };
-			}
+    return { message: `Comment has been created` };
+  }
 
-			const result = await Comment.create({
-				ProjectId,
-				UserId,
-				comment
-			})
+  static async readComment(ProjectId, page) {
+    const options = { where: { ProjectId } };
+    options.limit = getPagination(page).limit;
+    options.offset = getPagination(page).offset;
+    const result = {
+      Comments: await Comment.findAndCountAll(options),
+    };
+    const responses = getPagingData(result, page, getPagination(page).limit);
+    return responses;
+  }
 
-			res.status(200).json({ message: `Comment has been deleted`})
-		} catch (error) {
-			next(error)
-		}
-	}
-
-	static async readComment(req,res,next){
-		try {
-			res.json({
-        Comments: await Comment.findAll({where: {ProjectId: req.params.projectid}}),
+  static async deleteComment(req, res, next) {
+    try {
+      await Comment.destroy({
+        where: { id: req.params.commentId },
       });
-
-			// pagination blm di implement
-		} catch (error) {
-			next(error)
-		}
-	}
-
-	static async deleteComment(req,res,next){
-		try {
-			// help hahahaha
-		} catch (error) {
-			res.status(500).json(error) // sementara res status 500 dulu
-		}
-	}
+			res.json({ message: `Comment with has been deleted`})
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
-module.exports = Comment
+module.exports = CommentController;
