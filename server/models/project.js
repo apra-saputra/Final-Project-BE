@@ -7,32 +7,32 @@ module.exports = (sequelize, DataTypes) => {
       Project.hasMany(models.Comment, { foreignKey: "ProjectId" });
       Project.hasMany(models.Step, { foreignKey: "ProjectId" });
       Project.belongsTo(models.User, { foreignKey: "UserId" });
-			Project.belongsTo(models.Tag)
+      Project.belongsTo(models.Tag)
     }
   }
   Project.init(
     {
       UserId: {
-				allowNull: false,
-				type: DataTypes.INTEGER,
-			},
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
       title: {
-				allowNull: false,
-				type: DataTypes.STRING,
-			},
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
       slug: {
-				allowNull: false,
-				type: DataTypes.STRING,
-			},
+        type: DataTypes.STRING,
+      },
       imgUrl: DataTypes.STRING,
       introduction: {
-				allowNull: false,
-				type: DataTypes.TEXT,
-			},
-			difficulty: {
-				type: DataTypes.STRING
-			},
-			TagId: DataTypes.INTEGER,
+        allowNull: false,
+        type: DataTypes.TEXT,
+      },
+      difficulty: {
+        type: DataTypes.STRING
+      },
+      TagId: DataTypes.INTEGER,
+      status: DataTypes.STRING
     },
     {
       sequelize,
@@ -40,9 +40,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-		// Project.beforeCreate((projects, option) => {
-		// 	projects.slug = projects.title.replace(' ', '-')
-		// })
+  Project.beforeCreate((projects, option) => {
+    projects.slug = projects.title.replace(' ', '-')
+    projects.status = 'Active';
+  })
 
   return Project;
 };
