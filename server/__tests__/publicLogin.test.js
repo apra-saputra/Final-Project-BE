@@ -40,7 +40,6 @@ describe('POST /public/login - User Login with email and password', () => {
         password: '123456',
       })
       .then(res=>{
-        console.log(res)
         expect(res.status).toBe(200);
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('access_token', expect.any(String));
@@ -72,4 +71,44 @@ describe('POST /public/login - User Login with email and password', () => {
         expect(res.body).toHaveProperty('message', 'error invalid email or password');
       })
   });
+  test('POST /public/login - fail with empty password', () => {
+    return request(app)
+      .post('/public/login')
+      .send({
+        email: 'user@mail.com',
+        password: '',
+      })
+      .then(res=>{
+        expect(res.status).toBe(401);
+        expect(res.body).toBeInstanceOf(Object);
+        expect(res.body).toHaveProperty('message', 'error invalid email or password');
+      })
+  });
+  test('POST /public/login - fail with empty email', () => {
+    return request(app)
+      .post('/public/login')
+      .send({
+        email: '',
+        password: '123213',
+      })
+      .then(res=>{
+        expect(res.status).toBe(401);
+        expect(res.body).toBeInstanceOf(Object);
+        expect(res.body).toHaveProperty('message', 'error invalid email or password');
+      })
+  });
+  test('POST /public/login - fail with empty email and password', () => {
+    return request(app)
+      .post('/public/login')
+      .send({
+        email: '',
+        password: '',
+      })
+      .then(res=>{
+        expect(res.status).toBe(401);
+        expect(res.body).toBeInstanceOf(Object);
+        expect(res.body).toHaveProperty('message', 'error invalid email or password');
+      })
+  });
+  
 });
