@@ -19,13 +19,8 @@ class Users {
         subject: "DIT-HUB Registration Complete Email",
         text: "Welcome, You have been registered to DIT-HUB",
       }
-      transporter.sendMail(emailText, (err) => {
-        if (err) {
-          throw ({ name: "Failed to send mail" })
-        } else {
-          t.commit();
-        }
-      });
+      await transporter.sendMail(emailText);
+      t.commit();
       delete user.dataValues.email;
       delete user.dataValues.password;
       res.status(201).json({ message: "User Created", user });
