@@ -10,43 +10,46 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       UserId: {
-				allowNull: false,
+        allowNull: false,
         type: Sequelize.INTEGER,
-				references: {
-					model: "Users",
-					key: "id"
-				},
-				onDelete: 'CASCADE',
-				onUpdate: 'CASCADE'
+        references: {
+          model: "Users",
+          key: "id"
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       title: {
-				allowNull: false,
+        allowNull: false,
         type: Sequelize.STRING
       },
       slug: {
-				allowNull: false,
+        allowNull: false,
         type: Sequelize.STRING,
       },
       imgUrl: {
         type: Sequelize.STRING
       },
       introduction: {
-				allowNull: false,
+        allowNull: false,
         type: Sequelize.TEXT
       },
-			difficulty: {
-				allowNull: false,
-				type: Sequelize.STRING,
-			},
-			TagId: {
-				allowNull: false,
-				type: Sequelize.INTEGER,
-				references: {
-					model: "Tags",
-					key: "id"
-				},
-				onDelete: 'CASCADE',
-				onUpdate: 'CASCADE'
+      difficulty: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      TagId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Tags",
+          key: "id"
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      },
+      status: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
