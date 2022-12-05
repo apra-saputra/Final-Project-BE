@@ -9,7 +9,7 @@ const errorHandler = (err, req, res, next) => {
     message = errMsg[0]
   } else if (err.name === 'invalid_login') {
     code = 401
-    message = "error, invalid email or password"
+    message = "error invalid email or password"
   } else if (err.name === "project_not_found") {
     code = 404
     message = "project not found"

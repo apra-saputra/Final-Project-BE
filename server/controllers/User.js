@@ -33,6 +33,9 @@ class Users {
   static async Login(req, res, next) {
     const { email, password } = req.body;
     try {
+			if(!email || !password ){
+				throw ({ name: "invalid_login" });
+			}
       const user = await User.findOne({
         where: { email }
       })

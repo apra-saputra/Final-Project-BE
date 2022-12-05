@@ -11,7 +11,7 @@ const index = require('./routes/index');
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use('/', index);
+app.use(index);
 
 app.use(errorHandler)
 
