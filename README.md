@@ -2,4 +2,4 @@
 
 ### Note
 
-- init project kurang imagekit multer
+- jangan lupa copy env berdasarkan env.example
