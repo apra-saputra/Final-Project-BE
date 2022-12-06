@@ -26,15 +26,15 @@ io.on("connection", (socket) => {
   console.log("a user connected", socket.id)
 
   socket.on("handler-comment", async (data) => {
-    console.log(data)
+    await CommentController.createComment(data.UserId, data.ProjectId, data.comment)
     io.emit("handler-comment/response");
-    await CommentController.createComment(UserId, ProjectId, comment)
     });
 
-  socket.on("fetch-comment", async (ProjectId, page) => {
-    const comment = await CommentController.readComment(ProjectId, page)
+  socket.on("fetch-comment", async (ProjectId, limit) => {
+    const comment = await CommentController.readComment(ProjectId, limit)
     io.emit("fetch-comment/response", comment);
     });
+
 })
 
 app.use(express.urlencoded({ extended: true }))

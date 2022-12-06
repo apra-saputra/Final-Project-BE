@@ -1,4 +1,4 @@
-const { getPagination, getPagingData } = require("../helpers/pagination");
+const { getLoaderMore, getLoadMoreData } = require("../helpers/pagination");
 const { Comment, User } = require("../models");
 
 class CommentController {
@@ -16,17 +16,20 @@ class CommentController {
     return { message: `Comment has been created` };
   }
 
-  static async readComment(ProjectId, page) {
-    const options = { include: { model: User, attributes : ['username'] }, where: { ProjectId } };
-    options.limit = getPagination(page).limit;
-    options.offset = getPagination(page).offset;
+  static async readComment(ProjectId, limit) {
+    const options = {
+      include: { model: User, attributes: ["username"] },
+      where: { ProjectId },
+    };
+    console.log(limit, "<<<< ini limit body");
+    options.limit = getLoaderMore(limit).limit;
+    console.log(options.limit, "<<<< ini limit options");
     const result = {
       Comments: await Comment.findAndCountAll(options),
     };
-    const responses = getPagingData(
+    const responses = getLoadMoreData(
       result.Comments,
-      page,
-      getPagination(page).limit
+      getLoaderMore(limit).limit
     );
     return responses;
   }
