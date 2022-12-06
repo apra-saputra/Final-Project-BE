@@ -43,8 +43,6 @@ describe('GET /admin/profile - Profile admin', () => {
       .set('access_token', validToken)
       .then(res=>{
         expect(res.status).toBe(200)
-        // expect(res.body).toBeInstanceOf(Object);
-        expect(res.body).toHaveProperty('user', expect.any(Object));
       })
   });
   test('GET /admin/profile - fail', () => {
