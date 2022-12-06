@@ -21,12 +21,13 @@ class Authorization {
   static async deleteReport(req, res, next) {
     try {
       const { reportid } = req.params;
-      const report = await Report.findByPk(reportId);
-
+      console.log(req.user, reportid, "<<<<<<<<<<<<<<<<<<<<<<");
+      const report = await Report.findByPk(reportid);
+      console.log(report, "<<<<<<<<<<<<<<<<<<<<<<<<");
       if (!report) {
-        throw { name: "project_not_found" };
+        throw { name: "report_not_found" };
       }
-      if (report.UserId != req.user.id || req.user.role != "Admin") {
+      if (req.user.role != "Admin") {
         throw { name: "forbidden" };
       }
       next();
@@ -35,7 +36,7 @@ class Authorization {
     }
   }
 
-	static async deleteComment(req, res, next) {
+  static async deleteComment(req, res, next) {
     try {
       const { commentId } = req.params;
       const comment = await Comment.findByPk(commentId);
