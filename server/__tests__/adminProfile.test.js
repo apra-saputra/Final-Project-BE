@@ -6,16 +6,16 @@ const { hashPassword } = require('../helpers/bcrypt')
 const { encodeToken } = require('../helpers/jwt')
 
 const dateToday = new Date()
-let validToken = encodeToken({ id : 1, role: 'Admin' })
+let validToken = encodeToken({ id: 1, role: 'Admin' })
 let inValidToken = '123455cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjY3NTQ3ODg5fQ.RtrucOpSAthM1qxqo6MLXb2eI3_r8w6u_-KZ9CXoJ5'
 
-beforeAll(()=>{
+beforeAll(() => {
   return queryInterface.bulkDelete('Users', null, {
-    truncate: true, 
-    cascade:true,
-    restartIdentity:true
+    truncate: true,
+    cascade: true,
+    restartIdentity: true
   })
-    .then((result)=>{
+    .then((result) => {
       return queryInterface.bulkInsert('Users', [{
         "fullname": 'Testing',
         "username": 'testing',
@@ -26,13 +26,13 @@ beforeAll(()=>{
         "updatedAt": dateToday
       }], {})
     })
-  })
+})
 
-afterAll(()=>{
+afterAll(() => {
   return queryInterface.bulkDelete('Users', null, {
     truncate: true,
-    cascade:true,
-    restartIdentity:true
+    cascade: true,
+    restartIdentity: true
   })
 })
 
@@ -41,17 +41,21 @@ describe('GET /admin/profile - Profile admin', () => {
     return request(app)
       .get('/admin/profile')
       .set('access_token', validToken)
-      .then(res=>{
+      .then(res => {
         expect(res.status).toBe(200)
-        // expect(res.body).toBeInstanceOf(Object);
-        expect(res.body).toHaveProperty('user', expect.any(Object));
+        expect(res.body).toBeInstanceOf(Object);
+        expect(res.body).toHaveProperty('email', expect.any(String));
+        expect(res.body).toHaveProperty('fullname', expect.any(String));
+        expect(res.body).toHaveProperty('id', expect.any(Number));
+        expect(res.body).toHaveProperty('role', expect.any(String));
+        expect(res.body).toHaveProperty('username', expect.any(String));
       })
   });
   test('GET /admin/profile - fail', () => {
     return request(app)
       .get('/admin/profile')
       .set('access_token', inValidToken)
-      .then(res=>{
+      .then(res => {
         expect(res.status).toBe(401)
         expect(res.body).toHaveProperty('message', 'error authentication - invalid token');
       })

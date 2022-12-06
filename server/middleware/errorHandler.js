@@ -16,6 +16,9 @@ const errorHandler = (err, req, res, next) => {
   } else if (err.name === "tag_not_found") {
     code = 404
     message = "tag not found"
+  } else if (err.name === "report_not_found") {
+    code = 404
+    message = "report not found"
   } else if (err.name === "forbidden") {
     code = 403
     message = "you are not authorized"
