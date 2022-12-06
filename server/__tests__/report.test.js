@@ -193,7 +193,6 @@ describe('POST /public/reports/:projectid - Create Report', () => {
 
 describe('DELETE /public/reports/:projectid - Delete Report', () => {
   test('DELETE /public/reports/1 - Success', () => {
-    console.log("Sucess Test <<<<<<<<<<<<<<<<<<<<")
     return request(app)
       .delete('/public/reports/1')
       .set('access_token', adminToken)
@@ -203,7 +202,6 @@ describe('DELETE /public/reports/:projectid - Delete Report', () => {
       })
   })
   test('DELETE /public/reports/1 - Error: Report not found', () => {
-    console.log("Not Found Test <<<<<<<<<<<<<<<<<<<<")
     return request(app)
       .delete('/public/reports/1')
       .set('access_token', adminToken)

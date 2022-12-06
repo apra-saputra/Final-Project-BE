@@ -11,15 +11,15 @@ module.exports = class FavoriteControl {
     }
   }
 
-  static async readFavByProject(req, res, next) {
-    try {
-      res.json({
-        favourite: await Favorite.findOne({where: {ProjectId: req.params.projectid}}),
-      });
-    } catch (err) {
-      next(err);
-    }
-  }
+  // static async readFavByProject(req, res, next) {
+  //   try {
+  //     res.json({
+  //       favourite: await Favorite.findOne({where: {ProjectId: req.params.projectid}}),
+  //     });
+  //   } catch (err) {
+  //     next(err);
+  //   }
+  // }
 
   static async createFav(req, res, next) {
     try {
@@ -48,11 +48,11 @@ module.exports = class FavoriteControl {
   static async deleteFav(req, res, next) {
     try {
       const { favid } = req.params;
-      await Favorite.destroy({where: {id: favid}});
+      await Favorite.destroy({ where: { id: favid } });
 
-    res.json({
+      res.json({
         message: `Favorite with id : ${favid} has been deleted`
-    })  
+      })
     } catch (err) {
       next(err);
     }

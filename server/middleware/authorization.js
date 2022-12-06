@@ -9,7 +9,7 @@ class Authorization {
       if (!favorite) {
         throw { name: "project_not_found" };
       }
-      if (favorite.UserId != req.user.id || req.user.role != "Admin") {
+      if (favorite.UserId != req.user.id) {
         throw { name: "forbidden" };
       }
       next();
@@ -21,9 +21,7 @@ class Authorization {
   static async deleteReport(req, res, next) {
     try {
       const { reportid } = req.params;
-      console.log(req.user, reportid, "<<<<<<<<<<<<<<<<<<<<<<");
       const report = await Report.findByPk(reportid);
-      console.log(report, "<<<<<<<<<<<<<<<<<<<<<<<<");
       if (!report) {
         throw { name: "report_not_found" };
       }

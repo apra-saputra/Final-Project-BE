@@ -3,7 +3,8 @@ const FavoriteControl = require("../controllers/favorite");
 const Authorization = require("../middleware/authorization");
 const favorite = express.Router();
 
-favorite.get("/:projectid", FavoriteControl.readFavByProject);
+favorite.get('/', FavoriteControl.readFav);
+// favorite.get("/:projectid", FavoriteControl.readFavByProject);
 favorite.post("/:projectid", FavoriteControl.createFav);
 favorite.delete(
   "/:favid",

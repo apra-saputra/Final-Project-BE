@@ -3,16 +3,17 @@ const app = require('../app')
 const { sequelize, User } = require('../models')
 const { queryInterface } = sequelize
 const { hashPassword } = require('../helpers/bcrypt')
+const transporter = require('../helpers/nodemailer');
 
 const dateToday = new Date()
 
-beforeAll(()=>{
+beforeAll(() => {
   return queryInterface.bulkDelete('Users', null, {
-    truncate: true, 
-    cascade:true,
-    restartIdentity:true
+    truncate: true,
+    cascade: true,
+    restartIdentity: true
   })
-    .then((result)=>{
+    .then((result) => {
       return queryInterface.bulkInsert('Users', [{
         "fullname": 'Testing',
         "username": 'testing',
@@ -23,18 +24,23 @@ beforeAll(()=>{
         "updatedAt": dateToday
       }], {})
     })
-  })
+})
 
-afterAll(()=>{
+beforeEach(() => {
+  jest.restoreAllMocks();
+})
+
+afterAll(() => {
   return queryInterface.bulkDelete('Users', null, {
     truncate: true,
-    cascade:true,
-    restartIdentity:true
+    cascade: true,
+    restartIdentity: true
   })
 })
 
-describe('POST /public/register - admin register with API register', () => {
+describe('POST /public/register - public register with API register', () => {
   test('POST /public/register - success', () => {
+    jest.spyOn(transporter, 'sendMail').mockResolvedValue({ message: "Success" });
     return request(app)
       .post('/public/register')
       .send({
@@ -43,10 +49,26 @@ describe('POST /public/register - admin register with API register', () => {
         email: 'unregistered@mail.com',
         password: '1234567890',
       })
-      .then(res=>{
+      .then(res => {
         expect(res.status).toBe(201)
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('message', 'User Created');
+      })
+  });
+  test('POST /public/register - Error : Fail to Send Email', () => {
+    jest.spyOn(transporter, 'sendMail').mockRejectedValue({ name: "ISE" });
+    return request(app)
+      .post('/public/register')
+      .send({
+        fullname: 'Testing',
+        username: 'testing',
+        email: 'unregistered@mail.com',
+        password: '1234567890',
+      })
+      .then(res => {
+        expect(res.status).toBe(500)
+        expect(res.body).toBeInstanceOf(Object);
+        expect(res.body).toHaveProperty('message', 'internal server error');
       })
   });
 });
