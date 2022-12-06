@@ -1,5 +1,5 @@
-const { getPagination, getPagingData } = require("../helpers/pagination");
-const { Comment } = require("../models");
+const { getLoaderMore, getLoadMoreData } = require("../helpers/pagination");
+const { Comment, User } = require("../models");
 
 class CommentController {
   static async createComment(UserId, ProjectId, comment) {
@@ -16,14 +16,21 @@ class CommentController {
     return { message: `Comment has been created` };
   }
 
-  static async readComment(ProjectId, page) {
-    const options = { where: { ProjectId } };
-    options.limit = getPagination(page).limit;
-    options.offset = getPagination(page).offset;
+  static async readComment(ProjectId, limit) {
+    const options = {
+      include: { model: User, attributes: ["username"] },
+      where: { ProjectId },
+    };
+    console.log(limit, "<<<< ini limit body");
+    options.limit = getLoaderMore(limit).limit;
+    console.log(options.limit, "<<<< ini limit options");
     const result = {
       Comments: await Comment.findAndCountAll(options),
     };
-    const responses = getPagingData(result, page, getPagination(page).limit);
+    const responses = getLoadMoreData(
+      result.Comments,
+      getLoaderMore(limit).limit
+    );
     return responses;
   }
 
@@ -32,9 +39,9 @@ class CommentController {
       await Comment.destroy({
         where: { id: req.params.commentId },
       });
-			res.json({ message: `Comment with has been deleted`})
+      res.json({ message: `Comment with has been deleted` });
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 }
