@@ -6,7 +6,7 @@ const { hashPassword } = require('../helpers/bcrypt')
 const { encodeToken } = require('../helpers/jwt')
 
 const dateToday = new Date()
-let validToken = encodeToken({ id : 1, role: 'Admin' })
+let validToken = encodeToken({ id : 1, role: 'Users' })
 let inValidToken = '123455cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjY3NTQ3ODg5fQ.RtrucOpSAthM1qxqo6MLXb2eI3_r8w6u_-KZ9CXoJ5'
 
 beforeAll(()=>{
@@ -20,7 +20,7 @@ beforeAll(()=>{
         "fullname": 'Testing',
         "username": 'testing',
         "email": 'registered@mail.com',
-        "role": "Admin",
+        "role": "Users",
         "password": hashPassword('123123123'),
         "createdAt": dateToday,
         "updatedAt": dateToday
@@ -36,18 +36,25 @@ afterAll(()=>{
   })
 })
 
-describe('GET /admin/profile - Profile admin', () => {
-  test('GET /admin/profile - success', () => {
+describe('GET /public/profile - Profile admin', () => {
+  test('GET /public/profile - success', () => {
     return request(app)
-      .get('/admin/profile')
+      .get('/public/profile')
       .set('access_token', validToken)
       .then(res=>{
         expect(res.status).toBe(200)
       })
   });
-  test('GET /admin/profile - fail', () => {
+  test('GET /public/profile - fail', () => {
     return request(app)
-      .get('/admin/profile')
+      .get('/public/profile')
+      .then(res=>{
+        expect(res.status).toBe(401)
+      })
+  });
+  test('GET /public/profile - fail', () => {
+    return request(app)
+      .get('/public/profile')
       .set('access_token', inValidToken)
       .then(res=>{
         expect(res.status).toBe(401)
