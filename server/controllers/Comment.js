@@ -1,5 +1,5 @@
 const { getPagination, getPagingData } = require("../helpers/pagination");
-const { Comment } = require("../models");
+const { Comment, User } = require("../models");
 
 class CommentController {
   static async createComment(UserId, ProjectId, comment) {
@@ -17,13 +17,17 @@ class CommentController {
   }
 
   static async readComment(ProjectId, page) {
-    const options = { where: { ProjectId } };
+    const options = { include: { model: User, attributes : ['username'] }, where: { ProjectId } };
     options.limit = getPagination(page).limit;
     options.offset = getPagination(page).offset;
     const result = {
       Comments: await Comment.findAndCountAll(options),
     };
-    const responses = getPagingData(result, page, getPagination(page).limit);
+    const responses = getPagingData(
+      result.Comments,
+      page,
+      getPagination(page).limit
+    );
     return responses;
   }
 
@@ -32,9 +36,9 @@ class CommentController {
       await Comment.destroy({
         where: { id: req.params.commentId },
       });
-			res.json({ message: `Comment with has been deleted`})
+      res.json({ message: `Comment with has been deleted` });
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 }
