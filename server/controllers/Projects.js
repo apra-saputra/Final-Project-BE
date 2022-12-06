@@ -23,32 +23,32 @@ class Projects {
       //   TagId: TagId
       // }, { transaction: t });
 
-      // const promises = images.map((image) => {
-      //   return imagekit.upload({
-      //     file: image.buffer.toString('base64'),
-      //     fileName: image.originalname,
-      //   })
-      // })
-      // const imgOutput = await Promise.all(promises);
-      // imgOutput.forEach(el => {
-      //   imagesId.push(el.fileId);
-      // })
-      // let steps = []
-      // Names.forEach(el => {
-      //   let step = {
-      //     name: el
-      //   }
-      //   steps.push(step);
-      // })
-      // const output = steps.map((step, index) => {
-      //   step.ProjectId = project.id
-      //   step.description = Description[index]
-      //   step.imgUrl = imgOutput[index].url
-      //   return step
-      // })
-      // await Step.bulkCreate(output, { transaction: t })
-      // t.commit();
-      res.status(200).json({ message: "Project has been created" });
+      const promises = images.map((image) => {
+        return imagekit.upload({
+          file: image.buffer.toString('base64'),
+          fileName: image.originalname,
+        })
+      })
+      const imgOutput = await Promise.all(promises);
+      imgOutput.forEach(el => {
+        imagesId.push(el.fileId);
+      })
+      let steps = []
+      Names.forEach(el => {
+        let step = {
+          name: el
+        }
+        steps.push(step);
+      })
+      const output = steps.map((step, index) => {
+        step.ProjectId = project.id
+        step.description = Description[index]
+        step.imgUrl = imgOutput[index].url
+        return step
+      })
+      await Step.bulkCreate(output, { transaction: t })
+      t.commit();
+      res.status(201).json({ message: "Project has been created" });
     } catch (err) {
       imagesId.forEach(async (id) => {
         await imagekit.deleteFile(id);
@@ -89,6 +89,15 @@ class Projects {
         }]
       })
       res.status(200).json(projects);
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  static async SoftDelete(req, res, next) {
+    try {
+      await Project.update({ status: req.body.status }, { where: { id: req.params.projectid } })
+      res.status(200).json({ message: `status has been updated to` });
     } catch (err) {
       next(err)
     }
