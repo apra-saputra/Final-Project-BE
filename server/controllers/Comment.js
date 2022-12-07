@@ -21,9 +21,9 @@ class CommentController {
       include: { model: User, attributes: ["username"] },
       where: { ProjectId },
     };
-    console.log(limit, "<<<< ini limit body");
+
     options.limit = getLoaderMore(limit).limit;
-    console.log(options.limit, "<<<< ini limit options");
+
     const result = {
       Comments: await Comment.findAndCountAll(options),
     };
