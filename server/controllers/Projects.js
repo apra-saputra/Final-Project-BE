@@ -39,7 +39,6 @@ class Projects {
         }
         steps.push(step);
       })
-      console.log(imagesId)
       const output = steps.map((step, index) => {
         step.ProjectId = project.id
         step.description = Description[index]
@@ -82,15 +81,37 @@ class Projects {
 
   static async Read(req, res, next) {
     try {
-      const projects = await Project.findAll({
-        include: [{
-          model: Tag,
-          attributes: ['name']
-        }, {
-          model: User,
-          attributes: ['username']
-        }]
-      })
+      let projects = []
+      if (req.baseUrl == '/admin') {
+        const output = await Project.findAll({
+          include: [{
+            model: Tag,
+            attributes: ['name']
+          }, {
+            model: User,
+            attributes: ['username']
+          }]
+        })
+        projects = output.map(el => {
+          return el
+        })
+      } else if (req.baseUrl == '/public') {
+        const output = await Project.findAll({
+          include: [{
+            model: Tag,
+            attributes: ['name']
+          }, {
+            model: User,
+            attributes: ['username']
+          }],
+          where: {
+            status: 'Active'
+          }
+        })
+        projects = output.map(el => {
+          return el
+        })
+      }
       res.status(200).json(projects);
     } catch (err) {
       next(err)

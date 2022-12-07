@@ -1,4 +1,4 @@
-const { Step} = require("../models");
+const { Step } = require("../models");
 const imagekit = require("../helpers/imagekit");
 
 class StepControl {
@@ -12,6 +12,7 @@ class StepControl {
         file: image[0].buffer.toString("base64"),
         fileName: image[0].originalname,
       });
+      console.log(stepImage, "<<<<<<<<<<<<<<<<<");
       imagesId = stepImage.fileId;
 
       const output = {
@@ -21,10 +22,12 @@ class StepControl {
         imgUrl: stepImage.url,
       };
 
-      await Step.update(output, { where: { id: stepid }});
+      await Step.update(output, { where: { id: stepid } });
       res.status(200).json({ message: "Step has been updated" });
     } catch (err) {
-      imagekit.deleteFile(imagesId);
+      if (imagesId) {
+        imagekit.deleteFile(imagesId);
+      }
       next(err);
     }
   }

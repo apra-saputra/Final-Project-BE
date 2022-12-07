@@ -9,17 +9,17 @@ module.exports = (sequelize, DataTypes) => {
   Step.init(
     {
       ProjectId: {
-				allowNull: false,
-				type: DataTypes.INTEGER,
-			},
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
       name: {
-				allowNull: false,
-				type: DataTypes.STRING,
-			},
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
       description: {
-				allowNull: false,
-				type: DataTypes.STRING,
-			},
+        allowNull: false,
+        type: DataTypes.ARRAY(DataTypes.STRING),
+      },
       imgUrl: DataTypes.STRING,
     },
     {

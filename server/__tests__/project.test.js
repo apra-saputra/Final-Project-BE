@@ -5,7 +5,6 @@ const { queryInterface } = sequelize
 const { encodeToken } = require('../helpers/jwt')
 const imagekit = require('../helpers/imagekit');
 const { hashPassword } = require('../helpers/bcrypt')
-const multer = require('multer');
 
 const dateToday = new Date()
 let userToken = encodeToken({ id: 1, role: 'User' });
@@ -71,7 +70,7 @@ afterAll(() => {
     })
 })
 
-describe('POST /public/posts/project - Create Project', () => {
+describe('/public/posts/project - Project Stuff', () => {
   test('POST /public/posts/project - Success', () => {
     jest.spyOn(imagekit, 'upload').mockResolvedValue({ fileId: "1234521", url: "URL" });
     return request(app)
@@ -99,6 +98,7 @@ describe('POST /public/posts/project - Create Project', () => {
   test('POST /public/posts/project Error : Error from imagekit', () => {
     jest.spyOn(imagekit, 'upload').mockResolvedValueOnce({ fileId: "1234521", url: "URL" });
     jest.spyOn(imagekit, 'upload').mockRejectedValue({ name: "ISE" });
+    jest.spyOn(imagekit, 'deleteFile').mockResolvedValueOnce({ success: "success" });
     return request(app)
       .post('/public/posts/project')
       .set('access_token', userToken)
@@ -197,4 +197,21 @@ describe('POST /public/posts/project - Create Project', () => {
         expect(res.body).toHaveProperty('message', "internal server error");
       })
   })
+  test('GET /admin/projects - success', () => {
+    return request(app)
+      .get('/admin/projects')
+      .set('access_token', adminToken)
+      .then(res => {
+        expect(res.status).toBe(200)
+        expect(res.body).toBeInstanceOf(Array);
+        expect(res.body[0]).toHaveProperty('UserId', expect.any(Number));
+        expect(res.body[0]).toHaveProperty('title', expect.any(String));
+        expect(res.body[0]).toHaveProperty('slug', expect.any(String));
+        expect(res.body[0]).toHaveProperty('imgUrl', expect.any(String));
+        expect(res.body[0]).toHaveProperty('introduction', expect.any(String));
+        expect(res.body[0]).toHaveProperty('difficulty', expect.any(String));
+        expect(res.body[0]).toHaveProperty('TagId', expect.any(Number));
+        expect(res.body[0]).toHaveProperty('status', expect.any(String));
+      })
+  });
 })
