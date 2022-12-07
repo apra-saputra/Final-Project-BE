@@ -27,7 +27,7 @@
       "name": "application"
     },
     {
-      "name": "eletronic"
+      "name": "electronic"
     },
     {
       "name": "furniture"
@@ -44,7 +44,8 @@
       "imgUrl": "https://guide-images.cdn.ifixit.com/igi/YeTWVlSHJowO1PG1.medium",
       "introduction": "Repairing a rip in vinyl furniture is a short, simple, and low-cost fit that can be accomplished in the home. Vinyl furniture can rip for a number of reasons, such as a sharp object or a pet scratching the material. It is best to repair a tear as soon as possible to avoid the tear becoming larger.",
       "difficulty": "5",
-      "TagId": 2
+      "TagId": 2,
+      "status": "Active"
     },
     {
       "UserId": 2,
@@ -53,7 +54,8 @@
       "imgUrl": "https://guide-images.cdn.ifixit.com/igi/svRm1lMCfHrn1g5a.medium",
       "introduction": "This guide will walk you through all the steps to correctly assemble the Free Wheelchair Mission GEN 1 wheelchair. But first, familiarize yourself with tools you will be using with the Free Wheelchair Mission Tools Maintenance Guide.",
       "difficulty": "2",
-      "TagId": 1
+      "TagId": 1,
+      "status": "Archived"
     },
     {
       "UserId": 2,
@@ -62,7 +64,8 @@
       "imgUrl": "https://guide-images.cdn.ifixit.com/igi/svRm1lMCfHrn1g5a.medium",
       "introduction": "In case of broken lugs or screw holders, the two housing parts can be glued together. It is important to check that you have assembled everything correctly before gluing.",
       "difficulty": "3",
-      "TagId": 3
+      "TagId": 3,
+      "status": "Archived"
     }
   ],
   "Steps": [
