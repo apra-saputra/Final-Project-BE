@@ -74,6 +74,7 @@ describe('GET /admin/profile - Profile admin', () => {
       })
   })
   test('GET /admin/profile - Error : ISE', () => {
+    jest.spyOn(User, 'findByPk').mockResolvedValueOnce({ id: "1", role: "Admin" });
     jest.spyOn(User, 'findByPk').mockRejectedValue({ name: "ISE" });
     return request(app)
       .get('/admin/profile')
@@ -110,6 +111,7 @@ describe('GET /public/profile - Profile public', () => {
       })
   })
   test('GET /public/profile - Error : ISE', () => {
+    jest.spyOn(User, 'findByPk').mockResolvedValueOnce({ id: "2", role: "User" });
     jest.spyOn(User, 'findByPk').mockRejectedValue({ name: "ISE" });
     return request(app)
       .get('/public/profile')
