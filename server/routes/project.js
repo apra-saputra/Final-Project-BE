@@ -11,7 +11,6 @@ const mUpload = upload.fields([
   { name: "image", maxCount: 1 },
 ]);
 project.post("/project", mUpload, Projects.Create);
-project.put("/project/:projectid/:stepid", mUpload, StepControl.Update);
 project.patch("/project/:projectid", Projects.SoftDelete);
 
 module.exports = project;
