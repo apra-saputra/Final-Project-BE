@@ -95,6 +95,7 @@ class Projects {
 
   static async SoftDelete(req, res, next) {
     try {
+      console.log(req.body);
       await Project.update({status: req.body.status},{where:{id: req.params.projectid}})
       res.status(200).json({message: `status has been updated to`});
     } catch (err) {

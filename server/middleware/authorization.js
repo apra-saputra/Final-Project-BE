@@ -34,6 +34,17 @@ class Authorization {
     }
   }
 
+  static async getReportAdmin(req, res, next) {
+    try {
+      if (req.user.role != "Admin") {
+        throw { name: "forbidden" };
+      }
+      next();
+    } catch (err) {
+      next(err);
+    }
+  }
+
   static async deleteComment(req, res, next) {
     try {
       const { commentId } = req.params;

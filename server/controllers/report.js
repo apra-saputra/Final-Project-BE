@@ -1,9 +1,17 @@
-const { Report } = require("../models");
+const { Report, Project, Sequelize } = require("../models");
 
 module.exports = class ReportControl {
   static async readReport(req, res, next) {
     try {
-      const reports = await Report.findAll()
+      const reports = await Report.findAll({
+        attributes: [
+          [Sequelize.fn("COUNT", Sequelize.col("ProjectId")), "ReportCount"],
+        ],
+        include: {
+          model: Project,
+        },
+        group: ['Report.ProjectId', 'Project.id']
+      });
       res.status(200).json({ reports: reports });
     } catch (err) {
       next(err);
@@ -12,9 +20,11 @@ module.exports = class ReportControl {
 
   static async readReportByProject(req, res, next) {
     try {
-      const report = await Report.findOne({ where: { ProjectId: req.params.projectid } })
+      const report = await Report.findOne({
+        where: { ProjectId: req.params.projectid },
+      });
       if (!report) {
-        throw ({ name: "report_not_found" })
+        throw { name: "report_not_found" };
       }
       res.json({
         reports: report,
@@ -37,9 +47,9 @@ module.exports = class ReportControl {
       });
 
       if (created) {
-        res
-          .status(201)
-          .json({ message: `Project Id : ${report.id} has been add to report` });
+        res.status(201).json({
+          message: `Project Id : ${report.id} has been add to report`,
+        });
       } else {
         throw { name: "duplicate_report" };
       }
@@ -50,11 +60,11 @@ module.exports = class ReportControl {
 
   static async deleteReport(req, res, next) {
     try {
-      const { reportid } = req.params
+      const { reportid } = req.params;
       await Report.destroy({ where: { id: reportid } });
       res.json({
-        message: `Report with id : ${reportid} has been deleted`
-      })
+        message: `Report with id : ${reportid} has been deleted`,
+      });
     } catch (err) {
       next(err);
     }
