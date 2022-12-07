@@ -39,6 +39,7 @@ class Projects {
         }
         steps.push(step);
       })
+      console.log(imagesId)
       const output = steps.map((step, index) => {
         step.ProjectId = project.id
         step.description = Description[index]
@@ -46,7 +47,7 @@ class Projects {
         return step
       })
       await Step.bulkCreate(output, { transaction: t })
-      t.commit();
+      await t.commit();
       res.status(201).json({ message: "Project has been created" });
     } catch (err) {
       imagesId.forEach(async (id) => {
@@ -70,6 +71,9 @@ class Projects {
           model: Step
         }]
       })
+      if (!output) {
+        throw ({ name: "project_not_found" })
+      }
       res.status(200).json(output);
     } catch (err) {
       next(err)
@@ -95,9 +99,8 @@ class Projects {
 
   static async SoftDelete(req, res, next) {
     try {
-      console.log(req.body);
-      await Project.update({status: req.body.status},{where:{id: req.params.projectid}})
-      res.status(200).json({message: `status has been updated to`});
+      await Project.update({ status: req.body.status }, { where: { id: req.params.projectid } })
+      res.status(200).json({ message: `status has been updated to` });
     } catch (err) {
       next(err)
     }
