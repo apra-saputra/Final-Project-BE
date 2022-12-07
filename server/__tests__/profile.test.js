@@ -1,9 +1,10 @@
 const request = require('supertest')
-const app = require('../app')
+const { server: app } = require('../app')
 const { sequelize, User } = require('../models')
 const { queryInterface } = sequelize
 const { hashPassword } = require('../helpers/bcrypt')
 const { encodeToken } = require('../helpers/jwt')
+const jwt = require('jsonwebtoken')
 
 const dateToday = new Date()
 let adminToken = encodeToken({ id: 1, role: 'Admin' })
@@ -73,6 +74,27 @@ describe('GET /admin/profile - Profile admin', () => {
         expect(res.body).toHaveProperty('message', 'error authentication - invalid token');
       })
   })
+
+  test('GET /admin/profile - Error : Auth Fail No Token', () => {
+    return request(app)
+      .get('/admin/profile')
+      .then(res => {
+        expect(res.status).toBe(401)
+        expect(res.body).toHaveProperty('message', 'error authentication - invalid token');
+      })
+  })
+
+  test('GET /admin/profile - Error : Auth Fail No User', () => {
+    let userFail = encodeToken({ id: 99, role: 'Admin' })
+    return request(app)
+      .get('/admin/profile')
+      .set('access_token', userFail)
+      .then(res => {
+        expect(res.status).toBe(401)
+        expect(res.body).toHaveProperty('message', 'error authentication - invalid token');
+      })
+  })
+
   test('GET /admin/profile - Error : ISE', () => {
     jest.spyOn(User, 'findByPk').mockResolvedValueOnce({ id: "1", role: "Admin" });
     jest.spyOn(User, 'findByPk').mockRejectedValue({ name: "ISE" });

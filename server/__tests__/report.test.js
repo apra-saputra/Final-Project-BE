@@ -1,5 +1,5 @@
 const request = require('supertest')
-const app = require('../app')
+const { server: app } = require('../app')
 const { sequelize, Report } = require('../models')
 const { queryInterface } = sequelize
 const { hashPassword } = require('../helpers/bcrypt')
@@ -145,6 +145,16 @@ describe('GET /public/reports - view all reported project', () => {
         expect(res.body.reports).toBeInstanceOf(Array);
       })
   })
+  test('GET /public/reports - ERROR : Auth Error, Wrong Role', () => {
+    return request(app)
+      .get('/public/reports')
+      .set('access_token', validToken)
+      .then(res => {
+        expect(res.status).toBe(403)
+        expect(res.body).toBeInstanceOf(Object);
+        expect(res.body).toHaveProperty('message', "you are not authorized");
+      })
+  })
   test('GET /public/reports - Error : ISE', () => {
     jest.spyOn(Report, 'findAll').mockRejectedValue({ name: "ISE" });
     return request(app)
@@ -181,6 +191,15 @@ describe('POST /public/reports/:projectid - Create Report', () => {
 })
 
 describe('DELETE /public/reports/:projectid - Delete Report', () => {
+  test('DELETE /public/reports/1 - Error : Wrong ID', () => {
+    return request(app)
+      .delete('/public/reports/1')
+      .set('access_token', validToken)
+      .then(res => {
+        expect(res.body).toBeInstanceOf(Object);
+        expect(res.body).toHaveProperty('message', expect.any(String));
+      })
+  })
   test('DELETE /public/reports/1 - Success', () => {
     return request(app)
       .delete('/public/reports/1')

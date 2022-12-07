@@ -4,7 +4,7 @@ module.exports = class FavoriteControl {
   static async readFav(req, res, next) {
     try {
       res.json({
-        favourites: await Favorite.findAll(),
+        favourites: await Favorite.findAll({ where: { UserId: req.params.id } }),
       });
     } catch (err) {
       next(err);

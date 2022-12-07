@@ -1,5 +1,5 @@
 const request = require('supertest')
-const app = require('../app')
+const { server: app } = require('../app')
 const { sequelize, Project, Step } = require('../models')
 const { queryInterface } = sequelize
 const { encodeToken } = require('../helpers/jwt')
@@ -184,6 +184,26 @@ describe('/public/posts/project - Project Stuff', () => {
         expect(res.status).toBe(200);
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('message', "status has been updated to");
+      })
+  })
+  test('PATCH /admin/projects/:id - Error : No Project', () => {
+    return request(app)
+      .patch('/admin/projects/99')
+      .set('access_token', adminToken)
+      .then(res => {
+        expect(res.status).toBe(404);
+        expect(res.body).toBeInstanceOf(Object);
+        expect(res.body).toHaveProperty('message', "project not found");
+      })
+  })
+  test('PATCH /admin/projects/:id - Error : Wrong ID', () => {
+    return request(app)
+      .patch('/admin/projects/1')
+      .set('access_token', userToken)
+      .then(res => {
+        expect(res.status).toBe(403);
+        expect(res.body).toBeInstanceOf(Object);
+        expect(res.body).toHaveProperty('message', "you are not authorized");
       })
   })
   test('PATCH /admin/projects/:id - ERROR : ISE', () => {

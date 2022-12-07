@@ -1,5 +1,5 @@
 const request = require('supertest')
-const app = require('../app')
+const { server: app } = require('../app')
 const { sequelize, Project, Step, Tag } = require('../models')
 const { queryInterface } = sequelize
 const { encodeToken } = require('../helpers/jwt')

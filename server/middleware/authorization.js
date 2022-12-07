@@ -5,7 +5,6 @@ class Authorization {
     try {
       const { favid } = req.params;
       const favorite = await Favorite.findByPk(favid);
-
       if (!favorite) {
         throw { name: "project_not_found" };
       }
@@ -69,7 +68,7 @@ class Authorization {
       if (!comment) {
         throw { name: "comment_not_found" };
       }
-      if (comment.UserId != req.user.id || req.user.role != "Admin") {
+      if (comment.UserId != req.user.id && req.user.role != "Admin") {
         throw { name: "forbidden" };
       }
       next();

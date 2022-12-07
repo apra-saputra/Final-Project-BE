@@ -13,9 +13,9 @@ const errorHandler = (err, req, res, next) => {
   } else if (err.name === "project_not_found") {
     code = 404
     message = "project not found"
-  } else if (err.name === "tag_not_found") {
+  } else if (err.name === "comment_not_found") {
     code = 404
-    message = "tag not found"
+    message = "comment not found"
   } else if (err.name === "report_not_found") {
     code = 404
     message = "report not found"
