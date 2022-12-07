@@ -113,7 +113,7 @@ describe('GET /public/reports/:projectid - view reported project by ID : 1', () 
   test('GET /public/reports/:projectid - success', () => {
     return request(app)
       .get('/public/reports/1')
-      .set('access_token', validToken)
+      .set('access_token', adminToken)
       .then(res => {
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('reports', expect.any(Object));
@@ -125,7 +125,7 @@ describe('GET /public/reports/:projectid - view reported project by ID : 1', () 
     test('GET /public/reports/:projectid - ID Not Found', () => {
       return request(app)
         .get('/public/reports/99')
-        .set('access_token', validToken)
+        .set('access_token', adminToken)
         .then(res => {
           expect(res.status).toBe(404);
           expect(res.body).toBeInstanceOf(Object);
@@ -138,7 +138,7 @@ describe('GET /public/reports - view all reported project', () => {
   test('GET /public/reports - Success', () => {
     return request(app)
       .get('/public/reports')
-      .set('access_token', validToken)
+      .set('access_token', adminToken)
       .then(res => {
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('reports', expect.any(Object));
@@ -149,7 +149,7 @@ describe('GET /public/reports - view all reported project', () => {
     jest.spyOn(Report, 'findAll').mockRejectedValue({ name: "ISE" });
     return request(app)
       .get('/public/reports')
-      .set('access_token', validToken)
+      .set('access_token', adminToken)
       .then(res => {
         expect(res.status).toBe(500);
         expect(res.body).toBeInstanceOf(Object);
@@ -176,17 +176,6 @@ describe('POST /public/reports/:projectid - Create Report', () => {
         expect(res.status).toBe(400);
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('message', "project already on your report");
-      })
-  })
-  test('GET /public/reports - Error : ISE', () => {
-    jest.spyOn(Report, 'findAll').mockRejectedValue({ name: "ISE" });
-    return request(app)
-      .get('/public/reports')
-      .set('access_token', validToken)
-      .then(res => {
-        expect(res.status).toBe(500);
-        expect(res.body).toBeInstanceOf(Object);
-        expect(res.body).toHaveProperty('message', "internal server error");
       })
   })
 })

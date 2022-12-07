@@ -119,7 +119,7 @@ afterAll(() => {
     })
 })
 
-describe('PUT /public/:projectid/:stepid - Create Project', () => {
+describe('PUT /public/:projectid/:stepid - Edit Project', () => {
   test('PUT /public/:projectid/:stepid - Success', () => {
     jest.spyOn(imagekit, 'upload').mockResolvedValue({ fileId: "1234521", url: "URL" });
     return request(app)
