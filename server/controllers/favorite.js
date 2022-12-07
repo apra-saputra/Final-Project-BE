@@ -1,10 +1,10 @@
-const { Favorite } = require("../models");
+const { Favorite, Project } = require("../models");
 
 module.exports = class FavoriteControl {
   static async readFav(req, res, next) {
     try {
       res.json({
-        favourites: await Favorite.findAll({ where: { UserId: req.params.id } }),
+        favourites: await Favorite.findAll({ where: { UserId: req.params.id },include : Project }),
       });
     } catch (err) {
       next(err);
