@@ -1,5 +1,5 @@
 const request = require('supertest')
-const app = require('../app')
+const { server: app } = require('../app')
 const { sequelize, User } = require('../models')
 const { queryInterface } = sequelize
 const { hashPassword } = require('../helpers/bcrypt')

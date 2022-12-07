@@ -1,5 +1,5 @@
 const request = require('supertest')
-const app = require('../app')
+const { server } = require('../app')
 const { comparePassword } = require('../helpers/bcrypt')
 const { sequelize, User } = require('../models')
 const { queryInterface } = sequelize
@@ -41,7 +41,7 @@ afterAll(() => {
 
 describe('POST /public/login - User Login with email and password', () => {
   test('POST /admin/login - success', () => {
-    return request(app)
+    return request(server)
       .post('/admin/login')
       .send({
         email: 'user@mail.com',
@@ -54,7 +54,7 @@ describe('POST /public/login - User Login with email and password', () => {
       })
   });
   test('POST /admin/login - ERROR : fail with wrong password', () => {
-    return request(app)
+    return request(server)
       .post('/admin/login')
       .send({
         email: 'user@mail.com',
@@ -67,7 +67,7 @@ describe('POST /public/login - User Login with email and password', () => {
       })
   });
   test('POST /admin/login - ERROR : fail with unregistered account', () => {
-    return request(app)
+    return request(server)
       .post('/admin/login')
       .send({
         email: 'un_registered@mail.com',
@@ -80,7 +80,7 @@ describe('POST /public/login - User Login with email and password', () => {
       })
   });
   test('POST /admin/login - ERROR : fail with empty password', () => {
-    return request(app)
+    return request(server)
       .post('/admin/login')
       .send({
         email: 'user@mail.com',
@@ -93,7 +93,7 @@ describe('POST /public/login - User Login with email and password', () => {
       })
   });
   test('POST /admin/login - ERROR : fail with empty email', () => {
-    return request(app)
+    return request(server)
       .post('/admin/login')
       .send({
         email: '',
@@ -106,7 +106,7 @@ describe('POST /public/login - User Login with email and password', () => {
       })
   });
   test('POST /admin/login - ERROR : fail with empty email and password', () => {
-    return request(app)
+    return request(server)
       .post('/admin/login')
       .send({
         email: '',
@@ -119,7 +119,7 @@ describe('POST /public/login - User Login with email and password', () => {
       })
   });
   test('POST /admin/login - ERROR : fail unauthorized role', () => {
-    return request(app)
+    return request(server)
       .post('/admin/login')
       .send({
         email: 'user2@mail.com',

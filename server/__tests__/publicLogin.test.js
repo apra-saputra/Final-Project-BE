@@ -1,16 +1,15 @@
 const request = require('supertest')
-const app = require('../app')
-const { comparePassword } = require('../helpers/bcrypt')
+const { server: app } = require('../app')
 const { sequelize, User } = require('../models')
 const { queryInterface } = sequelize
 
-beforeAll(()=>{
+beforeAll(() => {
   return queryInterface.bulkDelete('Users', null, {
     truncate: true,
-    cascade:true,
-    restartIdentity:true
+    cascade: true,
+    restartIdentity: true
   })
-    .then(()=>{
+    .then(() => {
       // insert data for login testing
       return User.create({
         "username": "user",
@@ -22,12 +21,12 @@ beforeAll(()=>{
     })
 })
 
-afterAll(()=>{
+afterAll(() => {
   // remove all data or cleanup
   return queryInterface.bulkDelete('Users', null, {
     truncate: true,
-    cascade:true,
-    restartIdentity:true
+    cascade: true,
+    restartIdentity: true
   })
 })
 
@@ -39,7 +38,7 @@ describe('POST /public/login - User Login with email and password', () => {
         email: 'user@mail.com',
         password: '123456',
       })
-      .then(res=>{
+      .then(res => {
         expect(res.status).toBe(200);
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('access_token', expect.any(String));
@@ -52,7 +51,7 @@ describe('POST /public/login - User Login with email and password', () => {
         email: 'user@mail.com',
         password: '123456780',
       })
-      .then(res=>{
+      .then(res => {
         expect(res.status).toBe(401);
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('message', 'error invalid email or password');
@@ -65,7 +64,7 @@ describe('POST /public/login - User Login with email and password', () => {
         email: 'un_registered@mail.com',
         password: '123456789'
       })
-      .then(res=>{
+      .then(res => {
         expect(res.status).toBe(401);
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('message', 'error invalid email or password');
@@ -78,7 +77,7 @@ describe('POST /public/login - User Login with email and password', () => {
         email: 'user@mail.com',
         password: '',
       })
-      .then(res=>{
+      .then(res => {
         expect(res.status).toBe(401);
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('message', 'error invalid email or password');
@@ -91,7 +90,7 @@ describe('POST /public/login - User Login with email and password', () => {
         email: '',
         password: '123213',
       })
-      .then(res=>{
+      .then(res => {
         expect(res.status).toBe(401);
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('message', 'error invalid email or password');
@@ -104,11 +103,11 @@ describe('POST /public/login - User Login with email and password', () => {
         email: '',
         password: '',
       })
-      .then(res=>{
+      .then(res => {
         expect(res.status).toBe(401);
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('message', 'error invalid email or password');
       })
   });
-  
+
 });

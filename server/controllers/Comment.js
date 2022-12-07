@@ -3,17 +3,19 @@ const { Comment, User } = require("../models");
 
 class CommentController {
   static async createComment(UserId, ProjectId, comment) {
-    if (!ProjectId) {
-      throw { name: "project_not_found" };
+    try {
+      if (!ProjectId) {
+        throw { message: "project not found" };
+      }
+      await Comment.create({
+        ProjectId,
+        UserId,
+        comment,
+      });
+      return { message: `Comment has been created` };
+    } catch (err) {
+      return (err)
     }
-
-    await Comment.create({
-      ProjectId,
-      UserId,
-      comment,
-    });
-
-    return { message: `Comment has been created` };
   }
 
   static async readComment(ProjectId, limit) {
@@ -21,9 +23,7 @@ class CommentController {
       include: { model: User, attributes: ["username"] },
       where: { ProjectId },
     };
-    console.log(limit, "<<<< ini limit body");
     options.limit = getLoaderMore(limit).limit;
-    console.log(options.limit, "<<<< ini limit options");
     const result = {
       Comments: await Comment.findAndCountAll(options),
     };

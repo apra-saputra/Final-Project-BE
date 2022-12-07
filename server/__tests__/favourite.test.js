@@ -1,5 +1,5 @@
 const request = require('supertest')
-const app = require('../app')
+const { server: app } = require('../app')
 const { sequelize, Favorite } = require('../models')
 const { queryInterface } = sequelize
 const { hashPassword } = require('../helpers/bcrypt')
@@ -7,6 +7,7 @@ const { encodeToken } = require('../helpers/jwt')
 
 const dateToday = new Date()
 let validToken = encodeToken({ id: 1, role: 'User' })
+
 
 beforeAll(() => {
   return queryInterface.bulkDelete('Users', null, {
@@ -19,6 +20,14 @@ beforeAll(() => {
         "fullname": 'Testing',
         "username": 'testing',
         "email": 'registered@mail.com',
+        "role": "User",
+        "password": hashPassword('123123123'),
+        "createdAt": dateToday,
+        "updatedAt": dateToday
+      }, {
+        "fullname": 'Testing',
+        "username": 'testing',
+        "email": 'registered2@mail.com',
         "role": "User",
         "password": hashPassword('123123123'),
         "createdAt": dateToday,
@@ -113,22 +122,23 @@ describe('POST /public/favorites/:projectid - create a favourite project', () =>
         expect(res.body).toHaveProperty('message', "project already on your favorite");
       })
   })
+
 })
 
-describe('GET /public/favorites - view all favourited project', () => {
-  test('GET /public/favorites - Success', () => {
+describe('GET /public/favorites/:id - view all favourited project based on user id', () => {
+  test('GET /public/favorites/:id - Success', () => {
     return request(app)
-      .get('/public/favorites')
+      .get('/public/favorites/1')
       .set('access_token', validToken)
       .then(res => {
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('favourites', expect.any(Array));
       })
   })
-  test('GET /public/favorites - Error : ISE', () => {
+  test('GET /public/favorites/:id - Error : ISE', () => {
     jest.spyOn(Favorite, 'findAll').mockRejectedValue({ name: "ISE" });
     return request(app)
-      .get('/public/favorites')
+      .get('/public/favorites/1')
       .set('access_token', validToken)
       .then(res => {
         expect(res.status).toBe(500);
@@ -148,6 +158,17 @@ describe('DELETE /public/favorites/:favid', () => {
         expect(res.status).toBe(500);
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('message', "internal server error");
+      })
+  })
+  test('DELETE /public/favorites/:favid - Error : Forbidden because wrong ID', () => {
+    let invalidToken = encodeToken({ id: 2, role: 'User' })
+    return request(app)
+      .delete('/public/favorites/1')
+      .set('access_token', invalidToken)
+      .then(res => {
+        expect(res.status).toBe(403);
+        expect(res.body).toBeInstanceOf(Object);
+        expect(res.body).toHaveProperty('message', "you are not authorized");
       })
   })
   test('DELETE /public/favorites/:favid - Success', () => {

@@ -1,21 +1,21 @@
 const request = require('supertest')
-const app = require('../app')
+const { server: app } = require('../app')
 const { sequelize, User } = require('../models')
 const { queryInterface } = sequelize
 const { hashPassword } = require('../helpers/bcrypt')
 const { encodeToken } = require('../helpers/jwt')
 
 const dateToday = new Date()
-let validToken = encodeToken({ id : 1, role: 'Admin' })
+let validToken = encodeToken({ id: 1, role: 'Admin' })
 let inValidToken = '123455cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjY3NTQ3ODg5fQ.RtrucOpSAthM1qxqo6MLXb2eI3_r8w6u_-KZ9CXoJ5'
 
-beforeAll(()=>{
+beforeAll(() => {
   return queryInterface.bulkDelete('Users', null, {
-    truncate: true, 
-    cascade:true,
-    restartIdentity:true
+    truncate: true,
+    cascade: true,
+    restartIdentity: true
   })
-    .then((result)=>{
+    .then((result) => {
       return queryInterface.bulkInsert('Users', [{
         "fullname": 'Testing',
         "username": 'testing',
@@ -26,13 +26,13 @@ beforeAll(()=>{
         "updatedAt": dateToday
       }], {})
     })
-  })
+})
 
-afterAll(()=>{
+afterAll(() => {
   return queryInterface.bulkDelete('Users', null, {
     truncate: true,
-    cascade:true,
-    restartIdentity:true
+    cascade: true,
+    restartIdentity: true
   })
 })
 
@@ -47,7 +47,7 @@ describe('POST /admin/register - admin register with API register', () => {
         email: 'unregistered@mail.com',
         password: '1234567890',
       })
-      .then(res=>{
+      .then(res => {
         expect(res.status).toBe(201)
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('message', 'User Created');
@@ -67,7 +67,7 @@ describe('POST /admin/register - FAIL admin register with API register', () => {
         email: 'unregistered2@mail.com',
         password: '1234567890',
       })
-      .then(res=>{
+      .then(res => {
         expect(res.status).toBe(401)
         expect(res.body).toBeInstanceOf(Object);
         expect(res.body).toHaveProperty('message', 'error authentication - invalid token');
@@ -86,7 +86,7 @@ describe('POST /admin/register - FAIL admin register with API register', () => {
         email: 'registered',
         password: '1234567890',
       })
-      .then(res=>{
+      .then(res => {
         expect(res.status).toBe(400)
         expect(res.body).toBeInstanceOf(Object);
         // expect(res.body).toHaveProperty('message', 'Incorrect email format');
