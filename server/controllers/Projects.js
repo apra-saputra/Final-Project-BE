@@ -8,20 +8,19 @@ class Projects {
     const t = await sequelize.transaction();
     let imagesId = []
     try {
-      console.log(req.files);
-      // const projectImage = await imagekit.upload({
-      //   file: mainImage[0].buffer.toString('base64'),
-      //   fileName: mainImage[0].originalname
-      // })
-      // imagesId.push(projectImage.fileId);
-      // const project = await Project.create({
-      //   UserId: req.user.id,
-      //   title: title,
-      //   imgUrl: projectImage.url,
-      //   introduction: introduction,
-      //   difficulty: difficulty,
-      //   TagId: TagId
-      // }, { transaction: t });
+      const projectImage = await imagekit.upload({
+        file: mainImage[0].buffer.toString('base64'),
+        fileName: mainImage[0].originalname
+      })
+      imagesId.push(projectImage.fileId);
+      const project = await Project.create({
+        UserId: req.user.id,
+        title: title,
+        imgUrl: projectImage.url,
+        introduction: introduction,
+        difficulty: difficulty,
+        TagId: TagId
+      }, { transaction: t });
 
       const promises = images.map((image) => {
         return imagekit.upload({
@@ -40,6 +39,7 @@ class Projects {
         }
         steps.push(step);
       })
+      console.log(imagesId)
       const output = steps.map((step, index) => {
         step.ProjectId = project.id
         step.description = Description[index]
@@ -47,7 +47,7 @@ class Projects {
         return step
       })
       await Step.bulkCreate(output, { transaction: t })
-      t.commit();
+      await t.commit();
       res.status(201).json({ message: "Project has been created" });
     } catch (err) {
       imagesId.forEach(async (id) => {
@@ -71,6 +71,9 @@ class Projects {
           model: Step
         }]
       })
+      if (!output) {
+        throw ({ name: "project_not_found" })
+      }
       res.status(200).json(output);
     } catch (err) {
       next(err)
