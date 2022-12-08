@@ -137,6 +137,56 @@
       "difficulty": "1",
       "TagId": 5,
       "status": "Active"
+    },
+    {
+      "UserId": 6,
+      "title": "Replacing the Metal Plate Holding the Leg of an Ironing Board",
+      "slug": "Replacing+the+Metal+Plate+Holding+the+Leg+of+an+Ironing+Board",
+      "imgUrl": "https://guide-images.cdn.ifixit.com/igi/6bjw1VBeymCao6YW.medium",
+      "introduction": "A common type of ironing board has a lever fixed by a metal plate that is supposed to allow the legs to open and close. However, the metal plate can be damaged. When that happens, the ironing board will not be able to open and stand up. Need to iron clothes but ironing board doesn't stay up? Check out our repair guide to learn how to replace the broken metal plate of the ironing board!.",
+      "difficulty": "3",
+      "TagId": 1,
+      "status": "Active"
+    },
+    {
+      "UserId": 8,
+      "title": "Genesis II CSS-315 Ignitor Replacement",
+      "slug": "Genesis+II+CSS-315+Ignitor+Replacement",
+      "imgUrl": "https://guide-images.cdn.ifixit.com/igi/iVVRIXEJnf3WYNwR.medium",
+      "introduction": "this in loop tyou can choose what do you wanna to do. if thereis any mistake we want toi burry that in the nearest graveyard",
+      "difficulty": "1",
+      "TagId": 1,
+      "status": "Active"
+    },
+    {
+      "UserId": 10,
+      "title": "How to Build a Cardboard House",
+      "slug": "How+to+Build+a+Cardboard+House",
+      "imgUrl": "https://www.wikihow.com/images/thumb/5/52/Build-a-Cardboard-House-Step-1-Version-3.jpg/aid322880-v4-728px-Build-a-Cardboard-House-Step-1-Version-3.jpg.webp",
+      "introduction": "Whether you're helping a child or younger sibling with a school project or just trying to keep yourself amused on a rainy day, a cardboard house is a fun and easy craft project. You can make a simple model house, a dollhouse, or even a large cardboard playhouse",
+      "difficulty": "1",
+      "TagId": 5,
+      "status": "Active"
+    },
+    {
+      "UserId": 9,
+      "title": "How to Design a Small Garden",
+      "slug": "How+to+Design+a+Small+Garden",
+      "imgUrl": "https://www.wikihow.com/images/thumb/1/10/Design-a-Small-Garden-Step-1.jpg/aid11655402-v4-728px-Design-a-Small-Garden-Step-1.jpg.webp",
+      "introduction": "Even if you don’t have a large area in your yard, you can still make a beautiful garden that maximizes the space you have. Before you begin digging or planting, make sure you have a detailed plan for the layout of your garden and the plants you want to include.",
+      "difficulty": "4",
+      "TagId": 6,
+      "status": "Active"
+    },
+    {
+      "UserId": 9,
+      "title": "How To Make Small Cardboard House",
+      "slug": "How+To+Make+Small+Cardboard+House",
+      "imgUrl": "https://content.instructables.com/FBO/AFOM/K2JDBOZ2/FBOAFOMK2JDBOZ2.jpg?auto=webp&frame=1&width=320&md=cfcebdd8da728f2a9ba013f6981590af",
+      "introduction": "Cardboard House how to make small cardboard house I hope everyone like this beautiful house. thank you so much for watching this video. If you like my video",
+      "difficulty": "4",
+      "TagId": 6,
+      "status": "Active"
     }
   ],
   "Steps": [
