@@ -8,17 +8,66 @@
       "password": "12345"
     },
     {
-      "username": "user",
-      "fullname": "user fullname",
-      "role": "User",
-      "email": "user@mail.com",
+      "username": "bunda",
+      "fullname": "Bunda carla",
+      "role": "user",
+      "email": "carla@mail.com",
       "password": "12345"
     },
     {
-      "username": "user2",
-      "fullname": "user 2 fullname",
-      "role": "User",
-      "email": "user2@mail.com",
+      "username": "budi",
+      "fullname": "budi bukan",
+      "role": "user",
+      "email": "budi@mail.com",
+      "password": "12345"
+    },
+    {
+      "username": "mentari",
+      "fullname": "mentari tidak terang",
+      "role": "user",
+      "email": "mentari@mail.com",
+      "password": "12345"
+    },
+    {
+      "username": "adit",
+      "fullname": "adit aja",
+      "role": "user",
+      "email": "adit@mail.com",
+      "password": "12345"
+    },
+    {
+      "username": "jon",
+      "fullname": "jon aja",
+      "role": "user",
+      "email": "jon@mail.com",
+      "password": "12345"
+    },
+    {
+      "username": "jacob",
+      "fullname": "jacob aja",
+      "role": "user",
+      "email": "jacob@mail.com",
+      "password": "12345"
+    },
+    {
+      "username": "syauqi",
+      "fullname": "syauqi aja",
+      "role": "user",
+      "email": "syauqi@mail.com",
+      "password": "12345"
+    },
+    {
+      "username": "ressy",
+      "fullname": "ressy aja",
+      "role": "user",
+      "email": "ressy@mail.com",
+      "password": "12345"
+    },
+    {
+      "username": "jun",
+      "fullname": "jun aja",
+      "role": "user",
+      "email": "jun@mail.com",
       "password": "12345"
     }
   ],
@@ -33,7 +82,19 @@
       "name": "furniture"
     },
     {
+      "name": "hobby"
+    },
+    {
+      "name": "play"
+    },
+    {
       "name": "tools"
+    },
+    {
+      "name": "cooking"
+    },
+    {
+      "name": "other"
     }
   ],
   "Projects": [
@@ -48,17 +109,7 @@
       "status": "Active"
     },
     {
-      "UserId": 2,
-      "title": "Assembly of the Free Wheelchair Mission GEN 1",
-      "slug": "Assembly+of+the+Free+Wheelchair+Mission+GEN+1",
-      "imgUrl": "https://guide-images.cdn.ifixit.com/igi/svRm1lMCfHrn1g5a.medium",
-      "introduction": "This guide will walk you through all the steps to correctly assemble the Free Wheelchair Mission GEN 1 wheelchair. But first, familiarize yourself with tools you will be using with the Free Wheelchair Mission Tools Maintenance Guide.",
-      "difficulty": "2",
-      "TagId": 1,
-      "status": "Archived"
-    },
-    {
-      "UserId": 2,
+      "UserId": 3,
       "title": "ProfiMixx 44 Disassembly",
       "slug": "ProfiMixx+44+Disassembly",
       "imgUrl": "https://guide-images.cdn.ifixit.com/igi/svRm1lMCfHrn1g5a.medium",
@@ -66,28 +117,209 @@
       "difficulty": "3",
       "TagId": 3,
       "status": "Archived"
+    },
+    {
+      "UserId": 2,
+      "title": "Make Your First Arduino Robot",
+      "slug": "Make+Your+First+Arduino+Robot",
+      "imgUrl": "https://content.instructables.com/FN3/9PGK/IPZRNGW5/FN39PGKIPZRNGW5.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=643cda5d582928074fb5edb4bde24cd4",
+      "introduction": "Are you a beginner in arduino and have a plan to make your first robot then follow this instructbles.Are you not yet used an arduino then-have a familiar of this by feeling it. What about making your own robots. It's really cool thing?.But don't know where to start. Then this instructable is (best) for you. In this tutorial I am going to show how to make an arduino robot with different functionalities. We can learn the use of different programs for different functions, mainly a smart phone controlled robot with Obstacle avoid er, wall follower or maze solver robot etc or You can also make it for a single function",
+      "difficulty": "5",
+      "TagId": 2,
+      "status": "Active"
+    },
+    {
+      "UserId": 5,
+      "title": "How to Cook Rice in a Pot",
+      "slug": "How+to+Cook+Rice+in+a+Pot",
+      "imgUrl": "https://www.budgetbytes.com/wp-content/uploads/2022/04/How-to-Cook-Rice-bowl.jpg",
+      "introduction": "Cooking rice in a pot is different from cooking rice in a traditional rice cooker (or rice steamer). It can be harder to cook rice in a pot because you have to understand the rice to water ratio and know when to change the temperature during cooking. However, it can be done with the right steps and a lot of practice. Once you have gotten used to the type of rice, the water needed, and your cookware, it will be quite easy!Cooking rice in a pot is different from cooking rice in a traditional rice cooker (or rice steamer).",
+      "difficulty": "1",
+      "TagId": 5,
+      "status": "Active"
     }
   ],
   "Steps": [
     {
       "ProjectId": "3",
+      "name": "Materials and Tools",
+      "description": [
+        "Removing the five (TR15) scrapers",
+        "Material: Arduino uno, L293D motor shield, Hc-sro4 ultra sonic sensor, Hc-05 bluetooth module, 2 x Gear motor, 2 x Wheel, Caster wheel, 3 x 9 volt battery, 3 x battery clip, DC male jack",
+        "8 x Female to female jumper wire, Plastic box (size - 14 cm x 10 cm)",
+        "Tools, Screw driver, Soldering iron, Hot glue gun, Driller"
+      ],
+      "imgUrl": "https://content.instructables.com/FMJ/WA8I/IPZRNJG7/FMJWA8IIPZRNJG7.jpg?auto=webp&frame=1&width=781&fit=bounds&md=faa2f0a84081ee5d4d8314853d92991e"
+    },
+    {
+      "ProjectId": "3",
+      "name": "Making the Chasis",
+      "description": [
+        "Make two holes on either side of the box for connecting the motors and three holes on the down side for connecting the caster wheel after measuring and marking the correct diameter.",
+        "Then connect the motor after soldering the wire to motor shield and connect the caster wheel."
+      ],
+      "imgUrl": "https://content.instructables.com/F0E/T357/IPZRNLD1/F0ET357IPZRNLD1.jpg?auto=webp&frame=1&width=920&fit=bounds&md=e001ec8d765a5eb26e5f4c3face52e52"
+    },
+    {
+      "ProjectId": "3",
+      "name": "Connecting Battery",
+      "description": [
+        "Then place two 9 volt battery inside the box above the caster wheel.",
+        "Then wire this battery in parallel mode and connect a switch as shown in above diagram . This is the batteries that giving power to motor shield."
+      ],
+      "imgUrl": "https://content.instructables.com/FO4/OV63/IPZRNLMV/FO4OV63IPZRNLMV.jpg?auto=webp&frame=1&width=895&fit=bounds&md=58a2d5a67e69f510341c1817b934043c"
+    },
+    {
+      "ProjectId": "3",
+      "name": "Connecting the Arduino and Motor Shield",
+      "description": [
+        "Connecting the Arduino and Motor Shield Connect the motor shield above the arduino and place it above the battery. Then connect the wires from the motors and battery to the motor shield.",
+        "Look out the connection diagram before connecting, as it is very important.",
+        "Wiring Instructions, Connect the left motor to M1 of motor shield, Connect the right motor to M3 of motor shield, Connect the the wire from battery to ext pwr of motor shield, Don't forget to remove the jumper from the pwr of motor shield"
+      ],
+      "imgUrl": "https://content.instructables.com/FPL/ZXVK/IPZRNMOJ/FPLZXVKIPZRNMOJ.jpg?auto=webp&frame=1&width=785&fit=bounds&md=a2d783ca132df58186d08c56b3b4df6f"
+    },
+    {
+      "ProjectId": "3",
+      "name": "Make Two Holes and Power the Arduino",
+      "description": [
+        "Make two holes for accessing the USB port and DC input port of arduino.",
+        "Take another 9 volt battery and connect battery clip to dc male jack adaptor ,then connect the DC male jack to arduino DC input port, to power the arduino. Then place the battery between the motors and arduino inside the box."
+      ],
+      "imgUrl": "https://content.instructables.com/FCQ/IEIY/IPZRNPBO/FCQIEIYIPZRNPBO.jpg?auto=webp&frame=1&width=800&height=1024&fit=bounds&md=6503b490f9704382fb3300f394b3e886"
+    },
+    {
+      "ProjectId": "3",
+      "name": "Connecting Bluetooth Module and Switch.",
+      "description": [
+        "Connect the Bluetooth module to arduino as shown in the connection diagram and place it inside the box.",
+        "Then make hole to connect the switch on the back side of the box and connect the switch (here I have changed the switch which is used earlier because of some soldering problem)."
+      ],
+      "imgUrl": "https://content.instructables.com/FD0/1J3O/IPZRNUFO/FD01J3OIPZRNUFO.jpg?auto=webp&frame=1&width=891&fit=bounds&md=cf84244888226f7e1567eeebcca45623"
+    },
+    {
+      "ProjectId": "3",
+      "name": "Circuit Diagram. Connecting Ultrasonic Sensor and Finishing.",
+      "description": [
+        "Take the ultrasonic sensor and glue a small 'L' shaped plastic piece to it and glue it over the plastic box(or if not having a glue stick use double sided tape ). Then connect the jumper wires to as shown in the circuit diagram above."
+      ],
+      "imgUrl": "https://content.instructables.com/FI6/7T9X/IYOQMDCT/FI67T9XIYOQMDCT.jpg?auto=webp&frame=1&width=782&height=1024&fit=bounds&md=7bc30d2caa5560528f9b7f7a3d95a897"
+    },
+    {
+      "ProjectId": "3",
+      "name": "Last Step - Arduino Codes and Bluetooth App Editing",
+      "description": [
+        "First download the ARDUINO IDE from arduino.cc(here) and install on your PC. Download the above files and Upload it. thus we learned how to program a Arduino easily.",
+        "I have shown here some programs to work this robot as a obstacle avoiding robot, Wall follower, and Bluetooth controlled. and at last i have combined this three functions together. Watch the video for more details and information",
+        "You can use the wall follower robot code to function it as a maze solver robot.",
+        "Install the 'AFmotor' library before compiling the program. Copy paste the AFmotor folder to to arduino libraries folder"
+      ],
+      "imgUrl": "https://content.instructables.com/FQN/C5RO/IQ0TTWDE/FQNC5ROIQ0TTWDE.jpg?auto=webp&frame=1&width=933&height=1024&fit=bounds&md=01ff23580848fe3e2f81097f38399cdd"
+    },
+    {
+      "ProjectId": "4",
+      "name": "",
+      "description": [
+        "Choose your additional ingredients. You will only need water and rice to make your rice in a pot, but using additional ingredients adds a bit of extra flavor and texture.",
+        "If desired, add about a pinch of salt per cup of rice.",
+        "Use oil or butter to soften the rice and add flavor. Add a half a tablespoon of butter or oil per cup of rice.",
+        "Try flavoring the water with some chicken stock or a bouillon cube.",
+        "Get creative. Add some of your other favorite seeds and spices if you feel inspired. This will definitely change the flavor of your rice, so consult with others before you go too far."
+      ],
+      "imgUrl": "https://www.wikihow.com/images/thumb/9/9e/Cook-Rice-in-a-Pot-Step-1-Version-6.jpg/aid5276123-v4-728px-Cook-Rice-in-a-Pot-Step-1-Version-6.jpg"
+    },
+    {
+      "ProjectId": "4",
+      "name": "",
+      "description": [
+        "Measure the rice. Use about a half a cup of rice per person. Measure it, and put it in the pot. The pot should be large enough so the rice fills it to about 1/4 of the entire pot.",
+        "It is important to have the right sized pot, as a larger pot will alter the rice-to-water ratio, and a smaller pot could overflow"
+      ],
+      "imgUrl": "https://www.wikihow.com/images/thumb/1/15/Cook-Rice-in-a-Pot-Step-2-Version-6.jpg/550px-nowatermark-Cook-Rice-in-a-Pot-Step-2-Version-6.jpg"
+    },
+    {
+      "ProjectId": "4",
+      "name": "",
+      "description": [
+        "Rinse the rice. Not everyone finds this necessary. It is said that a good rinse will remove extra starch from the rice and avoid clumping.",
+        "Fill the pan with water until the water completely covers all of the rice. Stir with a spoon. Pour the cloudy water back in the sink.",
+        "Use a spoon or strainer to avoid pouring the rice out too."
+      ],
+      "imgUrl": "https://www.wikihow.com/images/thumb/d/d2/Cook-Rice-in-a-Pot-Step-3-Version-6.jpg/550px-nowatermark-Cook-Rice-in-a-Pot-Step-3-Version-6.jpg.webp"
+    },
+    {
+      "ProjectId": "4",
+      "name": "",
+      "description": [
+        "Measure the water. Using the same cup that you used for the rice, add the necessary amount of water. Generally, the ratio of water to rice is two to one.",
+        "For example, if you are cooking one cup of rice, add two cups of water. This may vary, however, by the type of rice you are using.",
+        "Remember that too much water will make the rice too soft and not enough water will leave it hard. Ask someone or consult the packaging if you are unsure.",
+        "Brown rice varieties will need about 2 ½ cups of water per one cup of rice.",
+        "Wild rice can take up to four cups of water per one cup of rice."
+      ],
+      "imgUrl": "https://www.wikihow.com/images/thumb/9/90/Cook-Rice-in-a-Pot-Step-4-Version-6.jpg/550px-nowatermark-Cook-Rice-in-a-Pot-Step-4-Version-6.jpg.webp"
+    },
+    {
+      "ProjectId": "4",
+      "name": "",
+      "description": [
+        "Add the other ingredients. Add the pinch of salt, oil, or butter."
+      ],
+      "imgUrl": "https://www.wikihow.com/images/thumb/a/af/Cook-Rice-in-a-Pot-Step-5-Version-6.jpg/550px-nowatermark-Cook-Rice-in-a-Pot-Step-5-Version-6.jpg.webp"
+    },
+    {
+      "ProjectId": "4",
+      "name": "",
+      "description": [
+        "Cover the pot and cook on moderately high heat until the water starts to boil. Keep a close eye on the rice. It can burn quickly on high heat."
+      ],
+      "imgUrl": "https://www.wikihow.com/images/thumb/4/46/Cook-Rice-in-a-Pot-Step-6-Version-6.jpg/550px-nowatermark-Cook-Rice-in-a-Pot-Step-6-Version-6.jpg.webp"
+    },
+    {
+      "ProjectId": "4",
+      "name": "",
+      "description": [
+        "Turn the heat down to low once the rice has boiled. Let the rice simmer for about ten minutes with the lid on.",
+        "Quickly check for steam holes in the rice.",
+        "This is a good sign. It means that the rice is absorbing the water. Don't take the lid off for too long-- you need the steam to cook the rice!"
+      ],
+      "imgUrl": "https://www.wikihow.com/images/thumb/6/67/Cook-Rice-in-a-Pot-Step-7-Version-5.jpg/550px-nowatermark-Cook-Rice-in-a-Pot-Step-7-Version-5.jpg.webp"
+    },
+    {
+      "ProjectId": "4",
+      "name": "",
+      "description": [
+        "Turn the heat off. Let the rice stand on the same burner with the lid on for 10 minutes. This is important because the steam will finish cooking the rice."
+      ],
+      "imgUrl": "https://www.wikihow.com/images/thumb/f/f6/Cook-Rice-in-a-Pot-Step-8-Version-5.jpg/550px-nowatermark-Cook-Rice-in-a-Pot-Step-8-Version-5.jpg.webp"
+    },
+    {
+      "ProjectId": "4",
+      "name": "",
+      "description": [
+        "Gently fluff the rice with a fork or rice paddle. Serve as desired."
+      ],
+      "imgUrl": "https://www.wikihow.com/images/thumb/c/c2/Cook-Rice-in-a-Pot-Step-9-Version-5.jpg/550px-nowatermark-Cook-Rice-in-a-Pot-Step-9-Version-5.jpg.webp"
+    },
+    {
+      "ProjectId": "2",
       "name": "Removing the scrapers",
       "description": ["Removing the five (TR15) scrapers"],
       "imgUrl": "https://guide-images.cdn.ifixit.com/igi/jv1LnAQp5GMHmsX1.medium"
     },
     {
-      "ProjectId": "3",
+      "ProjectId": "2",
       "name": "Removing the housing",
       "description": [
         "Removing the first part of the housing",
         "Removing the rotary wheel, important pay attention to the black component so that the nose in does not break off (green mark).",
-        "Removing the second part of the housing." 
+        "Removing the second part of the housing."
       ],
       "imgUrl": "https://guide-images.cdn.ifixit.com/igi/wc3hMveQVAHVpsRL.medium"
     },
     {
-      "ProjectId": "3",
-      "name": "Assembly of the housing I" ,
+      "ProjectId": "2",
+      "name": "Assembly of the housing I",
       "description": [
         "Make sure that the green marked elements are in the right place in both housings, the red element is only available once.",
         "Make sure that the two strands run as marked in blue.",
@@ -96,7 +328,7 @@
       "imgUrl": "https://guide-images.cdn.ifixit.com/igi/v5EMIcQI3GGTEqY2.medium"
     },
     {
-      "ProjectId": "3",
+      "ProjectId": "2",
       "name": "Assembly of the housing II",
       "description": [
         "Lift the motor-gearbox-unit a little bit upwards so that you can insert the black element with the nose into the hole of the white element. (marked in green)",
@@ -161,7 +393,7 @@
   "Comments": [
     {
       "ProjectId": 1,
-      "UserId": 2,
+      "UserId": 9,
       "comment": "ini gimna ya cara buatanya"
     },
     {
@@ -171,17 +403,17 @@
     },
     {
       "ProjectId": 1,
-      "UserId": 2,
+      "UserId": 8,
       "comment": "alatanya darimana ?"
     },
     {
-      "ProjectId": 1,
-      "UserId": 2,
+      "ProjectId": 2,
+      "UserId": 6,
       "comment": "di warung banyak gan"
     },
     {
-      "ProjectId": 1,
-      "UserId": 2,
+      "ProjectId": 2,
+      "UserId": 5,
       "comment": "terima kasih"
     }
   ]
